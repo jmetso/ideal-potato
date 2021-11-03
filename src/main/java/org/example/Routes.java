@@ -36,7 +36,7 @@ public class Routes extends RouteBuilder {
 
         from("direct:timeout")
                 .log("direct:timeout")
-                .delay(Integer.parseInt("{{TIMEOUT_DELAY:120000}}"))
+                .delay(simple("{{TIMEOUT_DELAY:120000}}"))
                 .to("direct:hello");
 
     }
