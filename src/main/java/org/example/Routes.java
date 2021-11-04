@@ -20,7 +20,7 @@ public class Routes extends RouteBuilder {
             .get("/hello/{name}")
                 .produces("text/plain")
                 .to("direct:hello-name")
-            .get("/timeout/hello")
+            .get("/timeout/{value}")
                 .produces("text/plain")
                 .to("direct:timeout");
         
@@ -35,8 +35,8 @@ public class Routes extends RouteBuilder {
                 .transform().simple("Hello ${header.name}!");
 
         from("direct:timeout")
-                .log("direct:timeout")
-                .delay(simple("{{TIMEOUT_DELAY:120000}}"))
+                .log("direct:timeout, ${header.name}")
+                .delay(simple("${header.name}"))
                 .to("direct:hello");
 
     }
