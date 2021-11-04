@@ -35,8 +35,8 @@ public class Routes extends RouteBuilder {
                 .transform().simple("Hello ${header.name}!");
 
         from("direct:timeout")
-                .log("direct:timeout, ${header.name}")
-                .delay(simple("${header.name}"))
+                .log("direct:timeout, ${header.value}")
+                .delay(simple("${header.value}"))
                 .to("direct:hello");
 
     }
